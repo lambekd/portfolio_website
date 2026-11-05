@@ -1,0 +1,65 @@
+:root {
+  --portfolio-hero-start: #083b5e;
+  --portfolio-hero-end: #0e7fb8;
+  --portfolio-neon: 0, 212, 255;
+}
+
+body {
+  background-color: #f6f8fb;
+}
+
+/* Home page hero: fills the screen so the nav buttons sit along the bottom.
+   Faded neon blue gradient with soft glows and a repeating tile of silver circuit traces. */
+.hero {
+  color: #fff;
+  background-color: var(--portfolio-hero-start);
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(var(--portfolio-neon), 0.35), transparent 55%),
+    radial-gradient(ellipse at 90% 85%, rgba(var(--portfolio-neon), 0.25), transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23d3d9e0' stroke-width='1.5' stroke-opacity='0.35' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 40H70L90 60H150L170 40H240'/%3E%3Cpath d='M0 120H40L60 100H110'/%3E%3Cpath d='M240 120H190L170 140H130'/%3E%3Cpath d='M0 200H90L110 180H180L200 200H240'/%3E%3Cpath d='M210 0V80L225 95V150L210 165V240'/%3E%3Cpath d='M130 0V25'/%3E%3Cpath d='M130 240V220'/%3E%3Cpath d='M30 0V20'/%3E%3Cpath d='M30 240V225'/%3E%3Crect x='60' y='145' width='40' height='26' rx='2'/%3E%3Cpath d='M68 145V135M80 145V135M92 145V135M68 171V181M80 171V181M92 171V181'/%3E%3C/g%3E%3Cg fill='%23d3d9e0' fill-opacity='0.5'%3E%3Ccircle cx='110' cy='100' r='3.5'/%3E%3Ccircle cx='130' cy='140' r='3.5'/%3E%3Ccircle cx='130' cy='25' r='3.5'/%3E%3Ccircle cx='130' cy='220' r='3.5'/%3E%3Ccircle cx='30' cy='20' r='3'/%3E%3Ccircle cx='30' cy='225' r='3'/%3E%3Ccircle cx='90' cy='60' r='2.5'/%3E%3Ccircle cx='150' cy='60' r='2.5'/%3E%3Ccircle cx='225' cy='95' r='2.5'/%3E%3Ccircle cx='110' cy='180' r='2.5'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(135deg, var(--portfolio-hero-start), var(--portfolio-hero-end));
+  background-size: auto, auto, 240px 240px, auto;
+}
+
+.hero-tagline {
+  max-width: 40rem;
+}
+
+/* Bio text: white, readable line length, light shadow so it stays legible over the circuit lines */
+.hero-bio {
+  max-width: 46rem;
+  color: #fff;
+  line-height: 1.7;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.hero-nav .btn {
+  min-width: 10rem;
+}
+
+/* Lift cards slightly on hover to show they are clickable */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hover:hover,
+.card-hover:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1.25rem rgba(15, 31, 61, 0.12);
+}
+
+/* Leave room for the sticky navbar when jumping to #contact-form */
+#contact-form {
+  scroll-margin-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover {
+    transition: none;
+  }
+
+  .card-hover:hover,
+  .card-hover:focus-within {
+    transform: none;
+  }
+}
