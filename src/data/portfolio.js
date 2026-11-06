@@ -52,27 +52,37 @@ export const projects = [
   },
 ];
 
+// Skills page cards. `column` (1-3) picks the column on wide screens. Groups in the same column
+// stack top-to-bottom in the order they appear here.
 // `level` is a 0-100 value shown as a progress bar. Remove it from a skill to show only a badge.
 export const skillGroups = [
   {
     name: 'Design Technology',
+    column: 1,
     skills: [
       { name: 'SolidWorks', level: 87 },
-      { name: 'Parametric Solid Modeling', level: 80 },
       { name: 'AutoCAD', level: 75 },
       { name: 'Inventor', level: 70 },
       { name: 'Revit', level: 60 },
       { name: 'Photoshop', level: 68 },
       { name: 'Illustrator', level: 65 },
       { name: 'InDesign', level: 76 },
+      { name: 'Parametric Solid Modeling', level: 80 },
+      { name: 'Engineering Drawings', level: 90 },
+      { name: 'GD&T', level: 90 },
+      { name: 'Graphic Design', level: 85 },
+      { name: 'Architectural Layouts', level: 72 },
+      { name: 'STEP files', level: 78 },
     ],
   },
   {
     name: 'Information Systems',
+    column: 2,
     skills: [
       { name: 'Business Process Mapping', level: 80 },
       { name: 'Project Management', level: 85 },
       { name: 'Requirements Gathering', level: 87 },
+      { name: 'Use Cases/User Stories', level: 85 },
       { name: 'Data Visualization', level: 85 },
       { name: 'Database Design', level: 85 },
       { name: 'Entity Relational Diagrams', level: 80 },
@@ -80,13 +90,19 @@ export const skillGroups = [
       { name: 'Power BI', level: 90 },
       { name: 'Power Automate', level: 70 },
       { name: 'SharePoint', level: 85 },
+      { name: 'Python', level: 75 },
+      { name: 'SQL', level: 75 },
     ],
   },
   {
     name: 'Skills Under Development',
+    column: 3,
     skills: [
       { name: 'Devin AI', level: 56 },
       { name: 'Cursor AI', level: 45 },
+      { name: 'Git', level: 40 },
+      { name: 'DevOps', level: 45 },
+      { name: 'GitHub', level: 48 },
     ],
   },
 ];

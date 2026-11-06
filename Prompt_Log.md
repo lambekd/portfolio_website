@@ -305,3 +305,110 @@ Clarification chosen: fade only, no sliding. Remove the up/down movement from th
 - Moved SharePoint to the end of Information Systems at 85%. That card now has 10 skills and scrolls.
 - Renamed the "Tools & Platforms" group to "Skills Under Development", with Devin AI (56%) and Cursor AI (45%) as progress bars.
 - Skills.jsx needed no change, since the card heading and the list label come from the group name.
+
+## 2026-11-06 18:24 UTC
+**Prompt:** @src/pages/Skills.jsx On the Information Systems card, add the following skills with the respective values: Python with a value of 75% and SQL with a value of 75%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Added Python (75%) and SQL (75%) to the end of the Information Systems group, after SharePoint. The card now has 12 skills and scrolls. Skills.jsx needed no change.
+
+## 2026-11-06 18:32 UTC
+**Prompt:** @src/pages/Skills.jsx Move Skills Under Development underneath the Design Technology. Create a third card to the right of the Information Systems Card titled "Software Tools". Move the following items from their original card to this new one along with their respective values: SolidWorks, AutoCAD, Inventor, Revit, Photoshop, Illustrator, InDesign, Power Apps and SharePoint.
+
+**What was changed:** `src/data/portfolio.js`, `src/pages/Skills.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Created a "Software Tools" group with SolidWorks 87, AutoCAD 75, Inventor 70, Revit 60, Photoshop 68, Illustrator 65 and InDesign 76 (from Design Technology), plus Power Apps 80 and SharePoint 85 (from Information Systems), in that order.
+- Design Technology now has only Parametric Solid Modeling (80%), since it wasn't in the move list.
+- Information Systems keeps 10 skills, including Power BI and Power Automate, which weren't in the move list.
+- Added a `column` field to each skill group. Skills.jsx now renders 3 columns, with the card markup moved into a local `SkillCard` component:
+  - Column 1: Design Technology, with Skills Under Development below it.
+  - Column 2: Information Systems.
+  - Column 3: Software Tools.
+  - The last card in each column stretches so the bottoms line up.
+- Documented `column` in the README.
+- Verified in headless Chrome at 1280×900:
+  - Design Technology is at x=71, y=208 and Skills Under Development directly below at x=71, y=353.
+  - Information Systems is at x=451 and Software Tools at x=831, both at y=208.
+  - All three columns end at the same bottom.
+  - Information Systems (10) and Software Tools (9) scroll.
+  - `npm run build` succeeds and `/skills` returns 200.
+
+## 2026-11-06 18:36 UTC
+**Prompt:** @src/pages/Skills.jsx Move Power BI and Power Automate from Infromation Systems to Software Tools. Under Design Technology, add the following skills and their respective values: Engineering Drawings at 90% and GD&T at 90%. Place Power BI and Power Automate between Power Apps and SharePoint.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Moved Power BI (90%) and Power Automate (70%) from Information Systems to Software Tools, between Power Apps and SharePoint.
+- Information Systems now has 8 skills and Software Tools 11.
+- Added Engineering Drawings (90%) and GD&T (90%) to Design Technology, after Parametric Solid Modeling, giving it 3 skills.
+
+## 2026-11-06 18:43 UTC
+**Prompt:** @src/pages/Skills.jsx Under Design Technology, add the following skills and their respective values: Graphic Design at 85% and Architectural Layouts at 72%. Under Information Systems, add Use Cases/User Stories at 85% after Requirements Gathering.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Added Graphic Design (85%) and Architectural Layouts (72%) to the end of Design Technology, which now has 5 skills.
+- Inserted Use Cases/User Stories (85%) in Information Systems right after Requirements Gathering, giving 9 skills.
+
+## 2026-11-06 18:46 UTC
+**Prompt:** @src/pages/Skills.jsx Modify the Information Systems and Software Tools to show all values in their columns without the need of a scroll bar.
+
+**What was changed:** `src/pages/Skills.jsx`, `src/index.css`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Removed the scrolling skill-list setup, since no card needs it now. Cards grow to show every skill.
+  - From the list in `SkillCard`: the `skill-scroll` class, `tabIndex` and `aria-label`.
+  - From `index.css`: the `.skill-scroll` rules (20rem height cap, overflow, scroll bar colours, focus outline).
+- Updated the README note.
+- Verified in headless Chrome at 1280×900:
+  - No list scrolls (scrollHeight equals clientHeight on all 4 cards), with overflow `visible`.
+  - Information Systems shows all 9 skills and Software Tools all 11, both at 611px tall.
+  - Column 1 (Design Technology above Skills Under Development) ends at the same bottom.
+  - `npm run build` succeeds and `/skills` returns 200.
+
+## 2026-11-06 18:59 UTC
+**Prompt:** @src/pages/Skills.jsx Under Design Technology, add STEP files at 78%. Under Skills Under Development, add Git, DevOps and GitHub. Place Git at 40%, DevOps at 45% and GitHub at 48%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Added STEP files (78%) to the end of Design Technology, which now has 6 skills.
+- Added Git (40%), DevOps (45%) and GitHub (48%) to the end of Skills Under Development, which now has 5 skills.
+
+## 2026-11-06 19:01 UTC
+**Prompt:** Show me the current sizes for the Information Systems and Software Tools cards.
+
+**What was changed:** No project changes, apart from this log entry.
+
+**Changes made:** None. Measured the Skills page in headless Chrome, using a temporary script outside the repo whose browser profile was deleted.
+
+| Window width | Information Systems | Software Tools |
+|---|---|---|
+| 1280px | 356 × 707 px | 356 × 707 px |
+| 1440px | 416 × 707 px | 416 × 707 px |
+| 768px (tablet, 2 columns) | 336 × 707 px | 336 × 611 px (wraps below Design Technology) |
+
+- At 1280 and 1440, both cards stretch to match column 1 (Design Technology 366px + 24px gap + Skills Under Development 317px = 707px).
+- Their own content needs about 513px (Information Systems) and 611px (Software Tools).
+
+## 2026-11-06 19:11 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Software Tools column, move the following items and their respective values back to Design Technology: SolidWorks, AutoCAD, Inventor, Revit, Photoshop, Illustrator and InDesign. Move Power Apps, Power BI, Power Automate and SharePoint back to Information Systems along with those items' respective values.
+
+Clarifications chosen: remove the now-empty Software Tools card and use 3 columns with one card each (Design Technology | Information Systems | Skills Under Development). Place the software first, then the skills.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Moved SolidWorks 87, AutoCAD 75, Inventor 70, Revit 60, Photoshop 68, Illustrator 65 and InDesign 76 to the top of Design Technology, which now has 13 skills.
+- Moved Power Apps 80, Power BI 90, Power Automate 70 and SharePoint 85 into Information Systems after Entity Relational Diagrams, which now has 13 skills.
+- Deleted the empty Software Tools group and moved Skills Under Development to column 3 (5 skills).
+- Skills.jsx and the README needed no change.
+- Verified:
+  - 31 skills in total, as before.
+  - `npm run build` succeeds and `/skills` returns 200.
+  - Headless Chrome at 1280×900 shows three cards side by side at y=208 (x=75, 455, 835), each 356 × 709 px.
+  - Skills Under Development's content needs only about 317px and is stretched to match.
