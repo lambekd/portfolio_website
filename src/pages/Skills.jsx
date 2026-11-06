@@ -2,6 +2,7 @@ import SectionButtons from '../components/SectionButtons.jsx';
 import { skillGroups } from '../data/portfolio.js';
 
 const buttons = [
+  { to: '/', label: 'Home', style: 'btn-danger' },
   { to: '/projects', label: 'Projects', style: 'btn-outline-light' },
   { to: '/skills', label: 'Skills', style: 'btn-light', current: true },
   { to: '/contact', label: 'Contact', style: 'btn-outline-light' },
@@ -20,7 +21,9 @@ export default function Skills() {
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h2 className="h5 card-title mb-3">{group.name}</h2>
-                  <ul className="list-unstyled mb-0">
+                  {/* Scrolls when the list is taller than the card allows (scroll bar on the right).
+                      tabIndex lets keyboard users focus it and scroll with the arrow keys. */}
+                  <ul className="list-unstyled mb-0 skill-scroll" tabIndex="0" aria-label={`${group.name} skills`}>
                     {group.skills.map((skill, index) =>
                       typeof skill.level === 'number' ? (
                         <li className="mb-3" key={`${skill.name}-${index}`}>

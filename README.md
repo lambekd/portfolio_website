@@ -59,8 +59,10 @@ index.html                 Page shell
 vite.config.js             Vite + React plugin config
 src/
   main.jsx                 Entry point: loads Bootstrap, router and styles
-  App.jsx                  Routes, navbar and scroll-to-section handling
-  index.css                Custom styles on top of Bootstrap
+  App.jsx                  Routes, navbar, scroll handling and page transitions
+  index.css                Custom styles on top of Bootstrap, including the page transition keyframes
+                           (on first open the content rises and fades in over 1000ms; on navigation it fades
+                           out 1000ms, then in 1000ms. If you change the fade-out time, update EXIT_MS in App.jsx too)
   data/portfolio.js        All site content (edit this)
   components/
     NavBar.jsx             Top bar with the name linking Home (all pages except Home)

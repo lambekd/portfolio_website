@@ -76,15 +76,17 @@ export const skillGroups = [
       { name: 'Data Visualization', level: 85 },
       { name: 'Database Design', level: 85 },
       { name: 'Entity Relational Diagrams', level: 80 },
+      { name: 'Power Apps', level: 80 },
+      { name: 'Power BI', level: 90 },
+      { name: 'Power Automate', level: 70 },
+      { name: 'SharePoint', level: 85 },
     ],
   },
   {
-    name: 'Tools & Platforms',
+    name: 'Skills Under Development',
     skills: [
-      { name: 'Microsoft Power Suite' },
-      { name: 'SharePoint' },
-      { name: 'Devin AI' },
-      { name: 'Cursor AI' },
+      { name: 'Devin AI', level: 56 },
+      { name: 'Cursor AI', level: 45 },
     ],
   },
 ];

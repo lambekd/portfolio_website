@@ -43,6 +43,91 @@ body {
   min-width: 10rem;
 }
 
+/* Page transitions (state handled in App.jsx).
+   - page-intro: when the app is first opened, the content rises up and fades into place.
+   - page-exit / page-enter: on navigation, the old content fades out, then the new content fades in.
+   Only the content (.hero's children) animates; the circuit background stays still.
+   The exit duration must match EXIT_MS in App.jsx. */
+@keyframes page-intro {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* `backwards` (not `both`): once the intro ends, the animation's styles are dropped entirely.
+   A leftover transform, even a zero one, would make the Bootstrap project popup position itself
+   inside the page content instead of over the screen. */
+.page-intro .hero > * {
+  animation: page-intro 1000ms ease-out backwards;
+}
+
+.page-exit .hero > * {
+  animation: page-exit 1000ms ease-in-out both;
+}
+
+.page-enter .hero > * {
+  animation: page-enter 1000ms ease-in-out both;
+}
+
+/* Bottom button row arrives slightly after the content for a staggered feel */
+.page-intro .hero > nav,
+.page-enter .hero > nav {
+  animation-delay: 80ms;
+}
+
+/* Skill lists: cap the height and scroll inside the card, with a thin blue scroll bar on the
+   right. The scroll bar only appears when a list is taller than the cap. */
+.skill-scroll {
+  max-height: 20rem;
+  overflow-y: auto;
+  padding-right: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: #0e7fb8 #e9eef4;
+}
+
+.skill-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.skill-scroll::-webkit-scrollbar-track {
+  background: #e9eef4;
+  border-radius: 4px;
+}
+
+.skill-scroll::-webkit-scrollbar-thumb {
+  background: #0e7fb8;
+  border-radius: 4px;
+}
+
+.skill-scroll:focus-visible {
+  outline: 2px solid #0e7fb8;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 /* Lift cards slightly on hover to show they are clickable */
 .card-hover {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -55,6 +140,12 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page-intro .hero > *,
+  .page-exit .hero > *,
+  .page-enter .hero > * {
+    animation: none;
+  }
+
   .card-hover {
     transition: none;
   }

@@ -18,22 +18,22 @@ export default function Home() {
 
         <div className="hero-bio mt-4">
           <p className="mb-4">
-            Hello, world! I’m Kevin Lambert and I am a business technologist with a long history in the world of
-            technology and business. My father worked in IT from 1982 to his retirement in 2009, which is where my
-            exposure to technology first originated.
+            Hello, world! I’m Kevin Lambert and I am a business technologist with an emerging track record in business
+            and technology. My father worked in IT from 1982 to his retirement in 2009, which is where my interest in
+            technology and its applications was fostered.
           </p>
           <p className="mb-4">
-            Since 2015, I have worked mainly as a CAD Designer for a trailer manufacturing company in the Midwest. In
-            that time, I create engineering prints for a wide variety of trailer products (box trailers, truck bodies)
-            for a wide range of key players in the logistics industry (JB Hunt, FedEx, Costco, Fleetco). After earning
-            a bachelor’s in Information Systems in 2024, I used my professional training to automate business
-            processes, visualize data to provide compelling insights for key stakeholders and develop information
-            systems for other company departments. Even though I continue to learn and develop new skills in the
-            technology world, I am open to meeting new people to see how we can apply technology to further our goals
-            and create value for stakeholders.
+            Since 2015, I have worked as a CAD designer for a trailer manufacturing company in the Midwest. In that
+            role, I use CAD software to create engineering prints for a diverse portfolio of trailer products that key
+            logistics companies use to support their operations. After earning a bachelor’s degree in Information
+            Systems in 2024, I used my professional training to optimize departmental business processes and provided
+            data-driven insights for key stakeholders. Even though I continue to learn and develop new skills in the
+            ever-evolving technology world, I enjoy meeting a diverse range of people to see how we can use technology
+            to solve problems and create value.
           </p>
           <p className="mb-0">
-            If you wish to contact me, feel free to reach out to me on LinkedIn.
+            If you are interested in learning more or seeing how we can collaborate, use the Contact button to reach out
+            to me on my LinkedIn profile.
           </p>
         </div>
       </div>

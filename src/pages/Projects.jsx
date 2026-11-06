@@ -6,6 +6,7 @@ import { categories, projects } from '../data/portfolio.js';
 const ALL = 'All';
 
 const buttons = [
+  { to: '/', label: 'Home', style: 'btn-danger' },
   { to: '/projects', label: 'Projects', style: 'btn-light', current: true },
   { to: '/skills', label: 'Skills', style: 'btn-outline-light' },
   { to: '/contact', label: 'Contact', style: 'btn-outline-light' },
@@ -20,9 +21,9 @@ export default function Projects() {
   return (
     <section className="hero page-fill d-flex flex-column">
       <div className="container flex-grow-1 py-5">
-        <h1 className="fw-bold">Projects</h1>
+        <h1 className="fw-bold">Project Portfolio</h1>
         <p className="opacity-75 mb-4">
-          Professional work in Design Technology and Information Systems.
+          Here are a few of the highlights of my career in Design Technology and Information Systems.
         </p>
 
         <div className="btn-group flex-wrap mb-4" role="group" aria-label="Filter projects by category">

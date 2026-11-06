@@ -190,3 +190,118 @@ Clarifications chosen: rename the Home "Contact Form" button to "Contact" (point
 - On Home, the "Contact Form" button is now "Contact", and the last bio sentence reads "If you wish to contact me, feel free to reach out to me on LinkedIn."
 - Deleted the unused `#contact-form` CSS rule and `.env.example`, which only held the Formspree ID. The `.env` rules in `.gitignore` stay as a safeguard.
 - Removed the Formspree setup, the `.env` install step and the deployment note from the README.
+
+## 2026-11-06 02:06 UTC
+**Prompt:** @src/pages/Projects.jsx Rename the title to Project Portfolio. Rename the text underneath it to say "Here are a few of the highlights of my career in Design Technology and Information Systems."
+
+**What was changed:** `src/pages/Projects.jsx`, `Prompt_Log.md`
+
+**Changes made:** Changed the Projects page heading to "Project Portfolio" and the subtitle to "Here are a few of the highlights of my career in Design Technology and Information Systems." The bottom "Projects" button and the filter buttons are unchanged.
+
+## 2026-11-06 02:09 UTC
+**Prompt:** @src/pages/Projects.jsx @src/pages/Skills.jsx @src/pages/Contact.jsx Have a red Home button appear to the left of Projects on the selected pages for easy navigation to the home page.
+
+**What was changed:** `src/pages/Projects.jsx`, `src/pages/Skills.jsx`, `src/pages/Contact.jsx`, `Prompt_Log.md`
+
+**Changes made:** Added a red Home button (Bootstrap `btn-danger`, linking to `/`) as the first button in the bottom row of the Projects, Skills and Contact pages, to the left of Projects. It uses the same size and layout as the other buttons through the shared `SectionButtons` component. The Home page is unchanged.
+
+## 2026-11-06 02:25 UTC
+**Prompt:** @src/pages/Home.jsx Revise the text body of the professional summary to say the following below: (Followed by three revised paragraphs: an introduction as a business technologist whose interest in technology was fostered by their father's IT career; CAD designer work since 2015 and the 2024 Information Systems degree; and an invitation to collaborate through the Contact button and LinkedIn.)
+
+**What was changed:** `src/pages/Home.jsx`, `Prompt_Log.md`
+
+**Changes made:** Replaced the three Home page bio paragraphs with the user's revised wording, keeping the existing white text and paragraph spacing. One typo was corrected, with the user's approval in the plan: "I am enjoy meeting" became "I enjoy meeting". Otherwise the text is verbatim.
+
+## 2026-11-06 04:29 UTC
+**Prompt:** Modify the app so that when the user clicks on the navigation buttons (i.e., projects, skills, etc.), the current objects on that page move upward and fade away. The target page's objects fade in and move in from the bottom. This gives the app a more animated and organic feel as opposed to just a static website.
+
+**What was changed:** `src/App.jsx`, `src/index.css`, `src/pages/NotFound.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Added page transitions with no new packages.
+- `App.jsx` keeps the page on screen separate from the page being navigated to. On navigation, the current content rises 40px and fades out over 300ms. The new page then mounts and its content rises in from 40px below over 450ms, with the bottom button row following 80ms later.
+- Only the content moves; the circuit background stays still.
+- The navbar swaps along with the content, and the scroll-to-top waits until the new page is shown.
+- Rapid clicks end on the last page clicked. Clicking the current page's button does nothing.
+- Visitors with "reduce motion" turned on in their operating system get instant page swaps.
+- The enter animation ends on `transform: none`, so the Projects popup still centres on the screen.
+- The Not Found page now uses the same background, so it matches and animates too.
+- Added notes on the transition files and timings to the README.
+- Verified that `npm run build` succeeds and all routes return 200. The animation itself was not checked visually.
+
+## 2026-11-06 04:34 UTC
+**Prompt:** Modify the app so that when the user clicks on the navigation buttons on the bottom of the screen, the objects on the previous screen fade away and the objects on the destination screen fade into the view.
+
+Clarification chosen: fade only, no sliding. Remove the up/down movement from the previous transition.
+
+**What was changed:** `src/index.css`, `src/App.jsx` (comment only), `Prompt_Log.md`
+
+**Changes made:**
+- The page transition keyframes now animate opacity only. The old page's content fades out over 300ms, then the new page's content fades in over 450ms, with the button row 80ms behind. The upward and downward movement is removed.
+- The transition logic in `App.jsx` is unchanged, apart from its comment.
+- The reduced-motion override still applies.
+- The README needed no change.
+- Verified that `npm run build` succeeds and all routes return 200.
+
+## 2026-11-06 04:39 UTC
+**Prompt:** The transition effect is still instantaneous. Let's prolong the fading effect to two seconds for each screen.
+
+**What was changed:** `src/index.css`, `src/App.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Set the page fade-out and fade-in to 2000ms each (`ease-in-out`), and set `EXIT_MS` in `App.jsx` to 2000 to match. Updated the timing note in the README.
+- Diagnosed the "instant" report:
+  - The dev server was serving the current transition code.
+  - The Windows visual-effects registry value is the default (effects on).
+  - A headless Chrome test, run with a temporary script outside the repo, clicked the Home page's Projects button. It measured content opacity falling from 1.00 to 0.02 over about 2s, the switch to Project Portfolio, then opacity rising from 0.00 to 1.00 over about 2s.
+  - Headless Chrome reported `prefers-reduced-motion: false`.
+- The transitions work in the browser. If they still look instant to the user, the likely cause is their browser reporting reduce motion (the site skips animations then), or a tab that hasn't reloaded.
+
+## 2026-11-06 04:45 UTC
+**Prompt:** I just pased the URL into Chrome and the fading effect works. Let's shorten it down to one second per transition and have the main page rise up and fade into place upon the user opening the web app.
+
+**What was changed:** `src/index.css`, `src/App.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Navigation fades are now 1000ms out and 1000ms in, with `EXIT_MS` set to 1000.
+- Added an opening "intro" animation (new `page-intro` keyframes, with `App.jsx` starting at stage `intro`). When the app is first opened, the content rises 40px and fades into place over 1000ms, with the button row 80ms behind.
+- Fixed the same-page branch in `App.jsx` so it no longer resets the stage on first render, which would have cancelled the intro.
+- The intro uses `backwards` fill, so no transform is left on the content afterwards. A headless Chrome test found that `both` fill left a zero transform, which would have pushed the Projects popup out of place when `/projects` was opened directly.
+- Added the intro to the reduced-motion override, and updated the README timing note.
+- Verified in headless Chrome:
+  - The intro rises from 40px to 0 while opacity goes from 0 to 1 over about 1s.
+  - Clicking Projects fades out over about 1s (0.96 to 0.01), swaps, then fades in over about 1s (0.00 to 1.00).
+  - Afterwards the content transform is `none`, and the popup on a directly opened `/projects` is centred.
+  - `npm run build` succeeds and all routes return 200.
+
+## 2026-11-06 17:54 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Tools & Platforms card, break down Microsoft Power Suite into sections for Power Apps, Power BI and Power Automate like Design Technology and Information Systems. Assign the following percentages to the tools: Power Apps has 80%, Power BI has 90% and Power Automate has 70%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** In the Tools & Platforms group, replaced the "Microsoft Power Suite" tag with three progress-bar entries: Power Apps (80%), Power BI (90%) and Power Automate (70%), shown first in that order. SharePoint, Devin AI and Cursor AI stay below as tags, since they have no percentages. Skills.jsx needed no change.
+
+## 2026-11-06 17:56 UTC
+**Prompt:** @src/pages/Skills.jsx Move Power Apps, Power BI and Power Automate to the Information Systems skill card. Assign a scroll bar off to the right of the card to make scrolling easier for the viewer.
+
+**What was changed:** `src/data/portfolio.js`, `src/pages/Skills.jsx`, `src/index.css`, `Prompt_Log.md`
+
+**Changes made:**
+- Moved Power Apps (80%), Power BI (90%) and Power Automate (70%) from Tools & Platforms to the end of Information Systems, which now has 9 skills. Tools & Platforms keeps SharePoint, Devin AI and Cursor AI.
+- Added a `.skill-scroll` class to every skill list. Lists are capped at 20rem tall and scroll inside the card, with a thin blue scroll bar on the right that appears only when needed.
+- Added padding so the percentages don't touch the scroll bar.
+- Each list can be focused with the keyboard (`tabIndex`, `aria-label`) and shows a focus outline.
+- Verified in headless Chrome at 1280×900:
+  - Design Technology (8 skills) and Information Systems (9 skills) both scroll, at 320px visible of 392px and 441px total, with a 10px scroll bar.
+  - Tools & Platforms (3 tags) does not scroll.
+  - `npm run build` succeeds and `/skills` returns 200.
+
+## 2026-11-06 18:05 UTC
+**Prompt:** @src/pages/Skills.jsx Move SharePoint from Tools and Platforms to Information Systems. Assign it a value of 85%. Change Tools and Platforms to Skills Under Development. Keep Cursor AI and Devin AI on that card. Assign Devin AI a value of 56% and Cursor AI a value of 45%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Moved SharePoint to the end of Information Systems at 85%. That card now has 10 skills and scrolls.
+- Renamed the "Tools & Platforms" group to "Skills Under Development", with Devin AI (56%) and Cursor AI (45%) as progress bars.
+- Skills.jsx needed no change, since the card heading and the list label come from the group name.

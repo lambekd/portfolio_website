@@ -2,6 +2,7 @@ import SectionButtons from '../components/SectionButtons.jsx';
 import { contact } from '../data/portfolio.js';
 
 const buttons = [
+  { to: '/', label: 'Home', style: 'btn-danger' },
   { to: '/projects', label: 'Projects', style: 'btn-outline-light' },
   { to: '/skills', label: 'Skills', style: 'btn-outline-light' },
   { to: '/contact', label: 'Contact', style: 'btn-light', current: true },
