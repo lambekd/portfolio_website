@@ -49,7 +49,7 @@ The site is only available while the dev server is running. This error means not
 All text content lives in **`src/data/portfolio.js`**: your name and tagline, projects, skills and contact details (LinkedIn, GitHub, location). The Home bio paragraphs are in `src/pages/Home.jsx`.
 
 - **Projects:** each project's `category` must exactly match an entry in `categories` (`Design Technology` or `Information Systems`). The Projects page builds its filter buttons from that list. `summary` shows on the card and `details` in the "View details" popup. `year` and `link` are optional: leave them empty to hide them.
-- **Skills:** give a skill a `level` (0–100) to show a progress bar, or leave `level` out to show a badge. Each skill group has a `column` (1–3) that sets its column on wide screens; groups in the same column stack top-to-bottom in the order they appear in the file. Cards grow to show every skill.
+- **Skills:** give a skill a `level` (0–100) to show a progress bar, or leave `level` out to show a badge. Each skill group has a `column` (1–3) that sets its column on wide screens; groups in the same column stack top-to-bottom in the order they appear in the file. Cards grow to show every skill and stretch to line up with the tallest column; add `fitContent: true` to a group to make its card only as tall as its skills (Skills Under Development uses this).
 - **Contact:** leave a field empty (`''`) to hide it.
 
 ## Project Structure

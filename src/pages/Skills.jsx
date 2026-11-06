@@ -63,8 +63,13 @@ export default function Skills() {
           {columns.map((groups) => (
             <div className="col-12 col-md-6 col-lg-4 d-flex flex-column gap-4" key={groups[0].name}>
               {groups.map((group, index) => (
-                // The last card in each column stretches so the column bottoms line up.
-                <SkillCard key={group.name} group={group} grow={index === groups.length - 1} />
+                // The last card in each column stretches so the column bottoms line up,
+                // unless its group sets `fitContent` (then it is only as tall as its skills).
+                <SkillCard
+                  key={group.name}
+                  group={group}
+                  grow={index === groups.length - 1 && !group.fitContent}
+                />
               ))}
             </div>
           ))}

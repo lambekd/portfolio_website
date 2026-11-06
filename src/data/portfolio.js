@@ -27,6 +27,17 @@ export const projects = [
     link: '', // Optional URL, e.g. a case study or repository. Leave empty to hide the button.
   },
   {
+    id: 'tara-hamfest-postcard',
+    title: 'TARA Hamfest Postcard',
+    category: 'Design Technology',
+    year: '2014',
+    summary: 'A postcard advertising the 2014 Hamfest for a local ham radio club.',
+    details:
+      'A postcard advertising the 2014 Hamfest for a local ham radio club. The card used a QR code to show people information about the event such as its date, time and location.',
+    tools: ['Adobe Photoshop', 'Adobe InDesign'],
+    link: '',
+  },
+  {
     id: 'wabash-cad-schedule',
     title: 'Wabash CAD Schedule',
     category: 'Information Systems',
@@ -54,6 +65,8 @@ export const projects = [
 
 // Skills page cards. `column` (1-3) picks the column on wide screens. Groups in the same column
 // stack top-to-bottom in the order they appear here.
+// Cards stretch to line up with the tallest column; `fitContent: true` makes a card only as tall
+// as its skills instead (it still grows as skills are added).
 // `level` is a 0-100 value shown as a progress bar. Remove it from a skill to show only a badge.
 export const skillGroups = [
   {
@@ -97,6 +110,7 @@ export const skillGroups = [
   {
     name: 'Skills Under Development',
     column: 3,
+    fitContent: true,
     skills: [
       { name: 'Devin AI', level: 56 },
       { name: 'Cursor AI', level: 45 },

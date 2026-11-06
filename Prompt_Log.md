@@ -412,3 +412,39 @@ Clarifications chosen: remove the now-empty Software Tools card and use 3 column
   - `npm run build` succeeds and `/skills` returns 200.
   - Headless Chrome at 1280×900 shows three cards side by side at y=208 (x=75, 455, 835), each 356 × 709 px.
   - Skills Under Development's content needs only about 317px and is stretched to match.
+
+## 2026-11-06 19:17 UTC
+**Prompt:** @src/pages/Skills.jsx Modify the Skills Under Development card to remove the empty space, yet leave it flexible to allow skills to be added, so that it can stretch as needed.
+
+**What was changed:** `src/data/portfolio.js`, `src/pages/Skills.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Added an optional `fitContent` setting for skill groups and set it on Skills Under Development. Skills.jsx only stretches the last card in a column when its group doesn't have `fitContent`.
+- Skills Under Development is now only as tall as its skills and grows as skills are added. Design Technology and Information Systems still line up.
+- Documented `fitContent` in the data comment and the README.
+- Verified in headless Chrome at 1280×900:
+  - Skills Under Development is 356 × 317 px, down from 709px.
+  - Design Technology and Information Systems stay 356 × 709 px, and all three share the same top.
+  - Adding 2 rows in the browser only (no project data changed) grew the card from 317px to 415px (+98px, about 49px per skill).
+  - `npm run build` succeeds and `/skills` returns 200.
+
+## 2026-11-06 19:30 UTC
+**Prompt:** @src/pages/Projects.jsx Add a project card next to Take Back the Night titled "TARA Hamfest Postcard." Have the description read: "A postcard advertising the 2014 Hamfest for a local ham radio club." Tools and Technologies used were Adobe Photoshop and Adobe InDesign. Have this project fall under Design Technology.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Added the "TARA Hamfest Postcard" project as the 2nd entry, right after Take Back The Night:
+  - Design Technology, 2014.
+  - The given description is used for both the card and the popup.
+  - Tools: Adobe Photoshop and Adobe InDesign.
+- Projects.jsx needed no change. The desktop grid row 1 is now Take Back The Night | TARA Hamfest Postcard | Wabash CAD Schedule.
+
+## 2026-11-06 19:33 UTC
+**Prompt:** @src/pages/Projects.jsx Under the TARA Hamfest postcard, add the following information when the user clicks View Details: A postcard advertising the 2014 Hamfest for a local ham radio club. The card used a QR code to show people information about the event such as its date, time and location.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Set the TARA Hamfest Postcard's `details`, which the "View details" popup shows, to the user's two-sentence text, verbatim.
+- The card's one-sentence `summary`, the tools, the category and the year are unchanged. Projects.jsx needed no change.
