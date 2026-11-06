@@ -25,6 +25,12 @@ body {
   max-width: 40rem;
 }
 
+/* Pages below the sticky navbar (about 56px tall) that should fill the rest of the screen,
+   so their bottom buttons sit at the bottom of the screen */
+.page-fill {
+  min-height: calc(100vh - 56px);
+}
+
 /* Bio text: white, readable line length, light shadow so it stays legible over the circuit lines */
 .hero-bio {
   max-width: 46rem;
@@ -35,6 +41,61 @@ body {
 
 .hero-nav .btn {
   min-width: 10rem;
+}
+
+/* Page transitions (state handled in App.jsx).
+   - page-intro: when the app is first opened, the content rises up and fades into place.
+   - page-exit / page-enter: on navigation, the old content fades out, then the new content fades in.
+   Only the content (.hero's children) animates; the circuit background stays still.
+   The exit duration must match EXIT_MS in App.jsx. */
+@keyframes page-intro {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* `backwards` (not `both`): once the intro ends, the animation's styles are dropped entirely.
+   A leftover transform, even a zero one, would make the Bootstrap project popup position itself
+   inside the page content instead of over the screen. */
+.page-intro .hero > * {
+  animation: page-intro 1000ms ease-out backwards;
+}
+
+.page-exit .hero > * {
+  animation: page-exit 1000ms ease-in-out both;
+}
+
+.page-enter .hero > * {
+  animation: page-enter 1000ms ease-in-out both;
+}
+
+/* Bottom button row arrives slightly after the content for a staggered feel */
+.page-intro .hero > nav,
+.page-enter .hero > nav {
+  animation-delay: 80ms;
 }
 
 /* Lift cards slightly on hover to show they are clickable */
@@ -48,12 +109,13 @@ body {
   box-shadow: 0 0.5rem 1.25rem rgba(15, 31, 61, 0.12);
 }
 
-/* Leave room for the sticky navbar when jumping to #contact-form */
-#contact-form {
-  scroll-margin-top: 5rem;
-}
-
 @media (prefers-reduced-motion: reduce) {
+  .page-intro .hero > *,
+  .page-exit .hero > *,
+  .page-enter .hero > * {
+    animation: none;
+  }
+
   .card-hover {
     transition: none;
   }

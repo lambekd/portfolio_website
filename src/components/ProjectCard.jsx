@@ -4,10 +4,22 @@ export default function ProjectCard({ project, onSelect }) {
       <div className="card-body d-flex flex-column">
         <div className="d-flex justify-content-between align-items-start mb-2 gap-2">
           <span className="badge text-bg-primary">{project.category}</span>
-          <small className="text-body-secondary">{project.year}</small>
+          {project.year && <small className="text-body-secondary">{project.year}</small>}
         </div>
         <h3 className="h5 card-title">{project.title}</h3>
         <p className="card-text text-body-secondary">{project.summary}</p>
+        {project.tools?.length > 0 && (
+          <div className="mb-3">
+            <p className="small fw-semibold mb-1">Tools and Technologies Used:</p>
+            <div className="d-flex flex-wrap gap-1">
+              {project.tools.map((tool, index) => (
+                <span className="badge text-bg-light border fw-normal" key={`${tool}-${index}`}>
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="mt-auto">
           <button
             type="button"
