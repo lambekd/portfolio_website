@@ -60,6 +60,11 @@ export const skillGroups = [
       { name: 'SolidWorks', level: 87 },
       { name: 'Parametric Solid Modeling', level: 80 },
       { name: 'AutoCAD', level: 75 },
+      { name: 'Inventor', level: 70 },
+      { name: 'Revit', level: 60 },
+      { name: 'Photoshop', level: 68 },
+      { name: 'Illustrator', level: 65 },
+      { name: 'InDesign', level: 76 },
     ],
   },
   {
@@ -68,6 +73,9 @@ export const skillGroups = [
       { name: 'Business Process Mapping', level: 80 },
       { name: 'Project Management', level: 85 },
       { name: 'Requirements Gathering', level: 87 },
+      { name: 'Data Visualization', level: 85 },
+      { name: 'Database Design', level: 85 },
+      { name: 'Entity Relational Diagrams', level: 80 },
     ],
   },
   {
@@ -83,7 +91,6 @@ export const skillGroups = [
 
 // Leave a value empty to hide that row on the Contact page.
 export const contact = {
-  email: 'klambertinfosystems400@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kevinlambert1993/',
   github: 'https://github.com/lambekd',
   location: 'West Lafayette, IN',

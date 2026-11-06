@@ -147,3 +147,46 @@ Clarification chosen: remove all three top-bar links and keep only "Kevin Lamber
 - LinkedIn: https://www.linkedin.com/in/kevinlambert1993/
 - GitHub: https://github.com/lambekd
 - location: West Lafayette, IN
+
+## 2026-11-06 01:05 UTC (approximate)
+**Prompt:** If I deploy this to Google Cloud Console for Cloud Run, which link should I start with for the main page?
+
+**What was changed:** No changes.
+
+**Changes made:** None. Answered that the main page is the root of the Cloud Run service URL (`https://<service>-<id>.<region>.run.app/`), not `localhost:5173` or `/index.html`. Noted that the repo needs a container setup (a Dockerfile with nginx and an `index.html` fallback, and the Formspree ID passed at build time) before it can run on Cloud Run. The plan to add that setup was declined.
+
+## 2026-11-06 01:12 UTC
+**Prompt:** @src/pages/Home.jsx Remove the Contact button and keep the Contact Form button.
+
+**What was changed:** `src/pages/Home.jsx`, `Prompt_Log.md`
+
+**Changes made:** Removed the Contact button from the Home page's bottom row. Home now shows Projects, Skills and Contact Form, and Contact Form still goes to `/contact#contact-form`. The Contact buttons on the other pages are unchanged.
+
+## 2026-11-06 01:40 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Information Systems skill card, add the following: Data Visualization at 85%, Database Design at 85%, Entity Relational Diagrams at 80%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Added three skills to the end of the Information Systems group, which Skills.jsx displays: Data Visualization (85%), Database Design (85%) and Entity Relational Diagrams (80%). The card now lists six skills.
+
+## 2026-11-06 01:42 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Design Technology skill card, add Inventor at 70%, Revit at 60%, Photoshop at 68%, Illustrator at 65% and InDesign at 76%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Added five skills to the end of the Design Technology group, in the order given: Inventor (70%), Revit (60%), Photoshop (68%), Illustrator (65%) and InDesign (76%). The card now lists eight skills.
+
+## 2026-11-06 01:53 UTC
+**Prompt:** @src/pages/Contact.jsx Remove the Send a message contact form along with the email address.
+
+Clarifications chosen: rename the Home "Contact Form" button to "Contact" (pointing to `/contact`), and change the bio's closing sentence to mention LinkedIn only.
+
+**What was changed:** `src/pages/Contact.jsx`, `src/data/portfolio.js`, `src/pages/Home.jsx`, `src/index.css`, `README.md`, `Prompt_Log.md`. Deleted `.env.example`.
+
+**Changes made:**
+- Removed the "Send a message" form and all of its logic (Formspree submission, validation, alerts, honeypot) from the Contact page. Also removed the Email row.
+- The Contact information card (LinkedIn, GitHub, Location) now stands alone at a wider width.
+- Removed `email` from `src/data/portfolio.js`, so the address isn't in the built site.
+- On Home, the "Contact Form" button is now "Contact", and the last bio sentence reads "If you wish to contact me, feel free to reach out to me on LinkedIn."
+- Deleted the unused `#contact-form` CSS rule and `.env.example`, which only held the Formspree ID. The `.env` rules in `.gitignore` stay as a safeguard.
+- Removed the Formspree setup, the `.env` install step and the deployment note from the README.

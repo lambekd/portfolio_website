@@ -26,7 +26,6 @@ which npm    # should point to ~/.nvm/..., not /mnt/c/...
 
 ```bash
 npm install                # install dependencies
-cp .env.example .env       # then set your Formspree form ID in .env (see below)
 npm run dev                # start the dev server at http://localhost:5173
 ```
 
@@ -45,22 +44,9 @@ The site is only available while the dev server is running. This error means not
 3. If `npm run dev` fails, run `which npm`. If it shows `/mnt/c/...`, open a new terminal or run `source ~/.bashrc` so nvm's Node is used.
 4. If Vite reports the port is in use, it's probably already running in another terminal. Use that one, or stop it and start again.
 
-## Contact Form Setup (Formspree)
-
-The contact form sends messages through [Formspree](https://formspree.io/), which emails them to you.
-
-1. Create a free Formspree account and a new form.
-2. Copy the form ID: the part after `/f/` in the endpoint `https://formspree.io/f/<ID>`.
-3. Put it in `.env`: `VITE_FORMSPREE_ID=<ID>`.
-4. Restart `npm run dev`.
-
-Until the ID is set, the form shows a "not set up yet" notice and its Send button is disabled.
-
-`.env` is git-ignored, so never commit it. Only `.env.example` (placeholder values) is committed. Note that any `VITE_` variable is built into the public browser bundle, so never put a true secret (API key, password) in one. A Formspree form ID is public by design.
-
 ## Editing Content
 
-All text content lives in **`src/data/portfolio.js`**: your name and tagline, projects, skills and contact details. Replace every `TODO` placeholder with your own content.
+All text content lives in **`src/data/portfolio.js`**: your name and tagline, projects, skills and contact details (LinkedIn, GitHub, location). The Home bio paragraphs are in `src/pages/Home.jsx`.
 
 - **Projects:** each project's `category` must exactly match an entry in `categories` (`Design Technology` or `Information Systems`). The Projects page builds its filter buttons from that list. `summary` shows on the card and `details` in the "View details" popup. `year` and `link` are optional: leave them empty to hide them.
 - **Skills:** give a skill a `level` (0–100) to show a progress bar, or leave `level` out to show a badge.
@@ -71,7 +57,6 @@ All text content lives in **`src/data/portfolio.js`**: your name and tagline, pr
 ```
 index.html                 Page shell
 vite.config.js             Vite + React plugin config
-.env.example               Template for local environment variables
 src/
   main.jsx                 Entry point: loads Bootstrap, router and styles
   App.jsx                  Routes, navbar and scroll-to-section handling
@@ -85,14 +70,14 @@ src/
     Home.jsx               Full-screen intro with section buttons along the bottom
     Projects.jsx           Filterable project grid with detail popups
     Skills.jsx             Skill groups with progress bars and badges
-    Contact.jsx            Contact details and the contact form (#contact-form)
+    Contact.jsx            Contact details (LinkedIn, GitHub, location)
                            (All four pages share the circuit background: the .hero class in index.css)
     NotFound.jsx           Shown for unknown URLs
 ```
 
 ## Deployment
 
-Run `npm run build` and host the `dist/` folder on any static host (e.g. Netlify, Vercel, GitHub Pages). The site uses client-side routes (`/projects`, `/skills`, `/contact`), so set the host to serve `index.html` for unknown paths. Otherwise refreshing a page other than Home returns a 404. Also set `VITE_FORMSPREE_ID` in the host's build environment settings.
+Run `npm run build` and host the `dist/` folder on any static host (e.g. Netlify, Vercel, GitHub Pages). The site uses client-side routes (`/projects`, `/skills`, `/contact`), so set the host to serve `index.html` for unknown paths. Otherwise refreshing a page other than Home returns a 404.
 
 ## Maintaining the Project
 
@@ -100,4 +85,4 @@ Run `npm run build` and host the `dist/` folder on any static host (e.g. Netlify
 - **Prompt log:** Record every IDE prompt in [Prompt_Log.md](Prompt_Log.md), with its date/time, what was changed and what changes were made.
 - **README:** Update this file whenever setup or maintenance steps change.
 - **Packages:** Add a package only when the project needs it. Current dependencies: `react`, `react-dom`, `react-router-dom`, `bootstrap`; dev: `vite`, `@vitejs/plugin-react`.
-- **Secrets:** Never put API keys or other secrets in the code or in any committed file. Keep local values in `.env`, which `.gitignore` excludes.
+- **Secrets:** Never put API keys or other secrets in the code or in any committed file. If the site ever needs such values, keep them in a local `.env`, which `.gitignore` excludes. Remember that any `VITE_` variable ends up in the public browser bundle.

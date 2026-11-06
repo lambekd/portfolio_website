@@ -5,7 +5,6 @@ const buttons = [
   { to: '/projects', label: 'Projects', style: 'btn-light' },
   { to: '/skills', label: 'Skills', style: 'btn-outline-light' },
   { to: '/contact', label: 'Contact', style: 'btn-outline-light' },
-  { to: '/contact#contact-form', label: 'Contact Form', style: 'btn-outline-light' },
 ];
 
 export default function Home() {
@@ -34,8 +33,7 @@ export default function Home() {
             and create value for stakeholders.
           </p>
           <p className="mb-0">
-            If you wish to contact me, feel free to reach out to me at the provided email address below or contact me
-            on LinkedIn.
+            If you wish to contact me, feel free to reach out to me on LinkedIn.
           </p>
         </div>
       </div>
