@@ -448,3 +448,24 @@ Clarifications chosen: remove the now-empty Software Tools card and use 3 column
 **Changes made:**
 - Set the TARA Hamfest Postcard's `details`, which the "View details" popup shows, to the user's two-sentence text, verbatim.
 - The card's one-sentence `summary`, the tools, the category and the year are unchanged. Projects.jsx needed no change.
+
+## 2026-11-06 20:16 UTC
+**Prompt:** Create the following three files in the project root - same as package.json and vite.config.js. (Followed by the contents of `Dockerfile`, a multi-stage `node:20-alpine` build served by `nginx:alpine` on port 8080; `nginx.conf`, listening on 8080 with an `index.html` fallback; and `.dockerignore` with node_modules, dist and .git.)
+
+Clarifications chosen: use `node:24-alpine` instead of `node:20-alpine` (Node 20 is end-of-life), and also exclude `.env` / `.env.*` in `.dockerignore`.
+
+**What was changed:** New branch `feature/cloud-run-docker`, created from `main`, which was the current branch. New: `Dockerfile`, `nginx.conf`, `.dockerignore`. Updated: `README.md`, `Prompt_Log.md`.
+
+**Changes made:**
+- Created the three files in the project root with the user's content.
+  - `Dockerfile`: only the build-stage base image changed, to `node:24-alpine`.
+  - `nginx.conf`: as provided.
+  - `.dockerignore`: adds `.env` and `.env.*`.
+- Replaced the README's generic Deployment section with "Deploy to Google Cloud Run":
+  - what each file does
+  - an optional local Docker test
+  - the `gcloud run deploy --source .` steps
+  - that the home page is the root of the printed Service URL
+  - The new files are also added to Project Structure.
+- Verified that `npm run build` still succeeds.
+- Docker Desktop wasn't running, so the local container test was skipped. Nothing was built, pushed or deployed.

@@ -57,6 +57,9 @@ All text content lives in **`src/data/portfolio.js`**: your name and tagline, pr
 ```
 index.html                 Page shell
 vite.config.js             Vite + React plugin config
+Dockerfile                 Container build for Cloud Run (Node builds dist/, nginx serves it on port 8080)
+nginx.conf                 nginx site config: port 8080, serves index.html for client-side routes
+.dockerignore              Files kept out of the Docker build (node_modules, dist, .git, .env files)
 src/
   main.jsx                 Entry point: loads Bootstrap, router and styles
   App.jsx                  Routes, navbar, scroll handling and page transitions
@@ -77,9 +80,42 @@ src/
     NotFound.jsx           Shown for unknown URLs
 ```
 
-## Deployment
+## Deploy to Google Cloud Run
 
-Run `npm run build` and host the `dist/` folder on any static host (e.g. Netlify, Vercel, GitHub Pages). The site uses client-side routes (`/projects`, `/skills`, `/contact`), so set the host to serve `index.html` for unknown paths. Otherwise refreshing a page other than Home returns a 404.
+The site deploys as a container. Three files in the project root set this up:
+
+- **`Dockerfile`**: a two-stage build. A `node:24-alpine` stage runs `npm ci` and `npm run build`. Then an `nginx:alpine` stage serves the built `dist/` folder on port 8080, the port Cloud Run expects by default.
+- **`nginx.conf`**: serves the site and sends unknown paths to `index.html`, so refreshing `/projects`, `/skills` or `/contact` works instead of returning a 404.
+- **`.dockerignore`**: keeps `node_modules`, `dist`, `.git` and any `.env` files out of the build.
+
+### Optional: test the container locally
+
+Docker Desktop must be running.
+
+```bash
+docker build -t portfolio-website .
+docker run --rm -p 8080:8080 portfolio-website
+```
+
+Open http://localhost:8080, then press Ctrl+C to stop.
+
+### Deploy
+
+Prerequisites: the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) (`gcloud`), a Google Cloud project with billing enabled, and the Cloud Run and Cloud Build APIs enabled.
+
+```bash
+gcloud auth login
+gcloud config set project <your-project-id>
+gcloud run deploy portfolio-website --source . --region <region> --allow-unauthenticated
+```
+
+With `--source .`, Cloud Build builds the image from the `Dockerfile` and Cloud Run runs it. When it finishes, it prints a **Service URL** such as `https://portfolio-website-xxxxxxxxxx-uc.a.run.app`. That root URL is the home page, and `/projects`, `/skills` and `/contact` hang off it. You can also find the URL in the Google Cloud Console under **Cloud Run → portfolio-website**.
+
+Run the same `gcloud run deploy` command again to publish updates.
+
+### Other static hosts
+
+You can also run `npm run build` and host `dist/` on any static host (e.g. Netlify, Vercel, GitHub Pages). Set the host to serve `index.html` for unknown paths.
 
 ## Maintaining the Project
 
