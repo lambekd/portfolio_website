@@ -62,7 +62,7 @@ Until the ID is set, the form shows a "not set up yet" notice and its Send butto
 
 All text content lives in **`src/data/portfolio.js`**: your name and tagline, projects, skills and contact details. Replace every `TODO` placeholder with your own content.
 
-- **Projects:** each project's `category` must exactly match an entry in `categories` (`Design Technology` or `Information Systems`). The Projects page builds its filter buttons from that list.
+- **Projects:** each project's `category` must exactly match an entry in `categories` (`Design Technology` or `Information Systems`). The Projects page builds its filter buttons from that list. `summary` shows on the card and `details` in the "View details" popup. `year` and `link` are optional: leave them empty to hide them.
 - **Skills:** give a skill a `level` (0–100) to show a progress bar, or leave `level` out to show a badge.
 - **Contact:** leave a field empty (`''`) to hide it.
 
@@ -78,13 +78,15 @@ src/
   index.css                Custom styles on top of Bootstrap
   data/portfolio.js        All site content (edit this)
   components/
-    NavBar.jsx             Top navigation (all pages except Home)
+    NavBar.jsx             Top bar with the name linking Home (all pages except Home)
     ProjectCard.jsx        A single project card
+    SectionButtons.jsx     Row of large section buttons along the bottom of every page
   pages/
     Home.jsx               Full-screen intro with section buttons along the bottom
     Projects.jsx           Filterable project grid with detail popups
     Skills.jsx             Skill groups with progress bars and badges
     Contact.jsx            Contact details and the contact form (#contact-form)
+                           (All four pages share the circuit background: the .hero class in index.css)
     NotFound.jsx           Shown for unknown URLs
 ```
 

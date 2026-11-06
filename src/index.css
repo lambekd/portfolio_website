@@ -25,6 +25,12 @@ body {
   max-width: 40rem;
 }
 
+/* Pages below the sticky navbar (about 56px tall) that should fill the rest of the screen,
+   so their bottom buttons sit at the bottom of the screen */
+.page-fill {
+  min-height: calc(100vh - 56px);
+}
+
 /* Bio text: white, readable line length, light shadow so it stays legible over the circuit lines */
 .hero-bio {
   max-width: 46rem;

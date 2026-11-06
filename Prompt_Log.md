@@ -47,3 +47,103 @@ All content is placeholder `TODO` text in `src/data/portfolio.js`. Dependencies 
 **What was changed:** `README.md`, `Prompt_Log.md`. No code or config changes.
 
 **Changes made:** Diagnosed that nothing was listening on port 5173, because the dev server had never been started. Node and nvm were set up correctly, and WSL is in NAT mode with localhost forwarding. Started the Vite dev server in the background on `127.0.0.1:5173`. Confirmed it returns 200 from inside WSL and from Windows (`curl.exe` on `localhost` and `127.0.0.1`, including `/contact`). Added a troubleshooting section to the README explaining that the dev server must be running and how to start it.
+
+## 2026-11-05 23:58 UTC
+**Prompt:** @src/pages/Home.jsx Change "Your Name" to "Kevin Lambert". Replace the TODO sentence with the following sentence: an experienced hybrid professional working at the intersection of manufacturing, computer-aided design and digital transformation. Replace "Design Technology and Information Systems" with "Experienced CAD Professional with Digital Transformation Experience".
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Updated the `profile` values that Home.jsx displays, which live in `src/data/portfolio.js` rather than in Home.jsx itself.
+- `name`: "Kevin Lambert". This also updates the navbar brand on the other pages.
+- `tagline`: the new sentence, with its first letter capitalized.
+- `title`: "Experienced CAD Professional with Digital Transformation Experience".
+
+Left the "Design Technology and Information Systems" wording on the Projects page and in the `index.html` meta description unchanged, since the request was about the home page.
+
+## 2026-11-06 00:06 UTC
+**Prompt:** @src/pages/Projects.jsx Add the following text to the Projects page. (Followed by three projects, each with a title, a description and "Tools and Technologies Used":
+- Take Back The Night: an Ivy Tech event poster, spring 2014; Adobe Illustrator, InDesign.
+- Wabash CAD Schedule: engineering sales order tracking; Microsoft Power Apps, SharePoint, Power Automate, Power BI.
+- Lafayette Urban Ministry Food Rescue Weighing System: food donation weighing app; Brecknell GP100, Devin & Cursor AI, LibreOffice Calc & Base.)
+
+**What was changed:** No changes. A plan was written, and the user interrupted it to add years.
+
+**Changes made:** None at this step. Implemented in the next entry.
+
+## 2026-11-06 00:08 UTC
+**Prompt:** For the Wabash CAD Schedule, give it the year 2024. For the LUM Food Rescue Weighing System, give it the year 2026.
+
+**What was changed:** `src/data/portfolio.js`, `src/components/ProjectCard.jsx`, `src/pages/Projects.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Replaced the 4 placeholder projects with the user's 3, using their wording verbatim.
+  - Take Back The Night: Design Technology, 2014.
+  - Wabash CAD Schedule: Information Systems, 2024.
+  - Lafayette Urban Ministry Food Rescue Weighing System: Information Systems, 2026.
+- Each card shows the first sentence as its summary, and the "View details" popup shows the full paragraph.
+- Cards now list the tools under "Tools and Technologies Used:", and the popup heading uses the same wording.
+- The year is hidden when empty.
+- Noted the optional `year` and `link` fields in the README.
+- Verified that `npm run build` succeeds and `/projects` returns 200.
+
+## 2026-11-06 00:12 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Design Technology card, add SolidWorks as a skill in place of TODO: Skill one. Place it at 87%. For Design Technology TODO: Skill two, replace it with Parametric Solid Modeling at place it at 80%. For TODO: Skill Three, replace it with AutoCAD and place it at 75%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Replaced the three Design Technology placeholder skills in `skillGroups`, which Skills.jsx displays: SolidWorks (87%), Parametric Solid Modeling (80%) and AutoCAD (75%). The Information Systems and Tools & Platforms placeholders are unchanged.
+
+## 2026-11-06 00:15 UTC
+**Prompt:** @src/pages/Skills.jsx Under the Information Systems card, replace TODO: Skill One with Business Process Mapping at 80%. Replace TODO: Skill two with Project Management at 85%. Replace TODO: Skill three with Requirements Gathering at 87%.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Replaced the three Information Systems placeholder skills in `skillGroups`: Business Process Mapping (80%), Project Management (85%) and Requirements Gathering (87%). The Tools & Platforms placeholders are unchanged.
+
+## 2026-11-06 00:23 UTC
+**Prompt:** @src/pages/Skills.jsx Change the page background to match that of the homepage. Place the Projects, Skills and Contact buttons at the bottom of the page with the same formatting as the Home page for consistency.
+
+**What was changed:** New: `src/components/SectionButtons.jsx`. Updated: `src/pages/Skills.jsx`, `src/pages/Home.jsx`, `src/index.css`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- Moved Home's bottom button row into a shared `SectionButtons` component, so both pages use identical formatting. Home looks the same as before.
+- The Skills page now uses the Home background (the `.hero` class) and fills the screen below the navbar (new `.page-fill` class).
+- Skills shows Projects, Skills and Contact buttons along the bottom. Skills, the current page, is the solid button and is marked with `aria-current`.
+- The Skills heading and subtitle are now white for contrast. The skill cards stay white.
+- Added the new component to the README's project structure.
+
+## 2026-11-06 00:26 UTC
+**Prompt:** Modify the Projects and Contacts pages to match the background formatting of the Home Page and the Skills Page. Remove the Projects, Skills and Contact text links from the tops of the pages that they're on.
+
+Clarification chosen: remove all three top-bar links and keep only "Kevin Lambert", which links Home. Navigation moves to the bottom buttons on every page.
+
+**What was changed:** `src/components/NavBar.jsx`, `src/pages/Projects.jsx`, `src/pages/Contact.jsx`, `README.md`, `Prompt_Log.md`
+
+**Changes made:**
+- The top bar now shows only the "Kevin Lambert" link to Home. Removed the Projects/Skills/Contact links, the mobile menu toggle and its state.
+- Projects and Contact now use the Home/Skills circuit background (`.hero` and `.page-fill`), with the shared `SectionButtons` row along the bottom. The current page's button is solid.
+- Page headings are white, and the subtitles are lighter white instead of grey.
+- The Projects filter buttons switched to light styles so they're readable on blue.
+- Cards, the project popup and the contact form keep their white backgrounds and dark text. Bootstrap sets their text color, so they stay readable.
+- Updated the README structure notes.
+- Verified that `npm run build` succeeds and all four routes return 200.
+
+## 2026-11-06 00:45 UTC
+**Prompt:** @src/pages/Skills.jsx Revise the Title to say "Skills & Software". Under the Tools and Platforms card, replace TODO: Tool with Microsoft Power Suite, SharePoint, Devin AI and Cursor AI.
+
+**What was changed:** `src/pages/Skills.jsx`, `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:**
+- Changed the Skills page heading to "Skills & Software". The bottom "Skills" button label is unchanged.
+- Replaced the 3 `TODO: Tool` placeholders in the Tools & Platforms group with 4 tags: Microsoft Power Suite, SharePoint, Devin AI and Cursor AI.
+
+## 2026-11-06 00:50 UTC
+**Prompt:** @src/pages/Contact.jsx Replace the email "you@example.com" with "klambertinfosystems400@gmail.com". Replace the location with West Lafayette, IN. Insert a link to GitHub with the following URL: https://github.com/lambekd. Insert a link to LinkedIn with the following URL: https://www.linkedin.com/in/kevinlambert1993/.
+
+**What was changed:** `src/data/portfolio.js`, `Prompt_Log.md`
+
+**Changes made:** Set the `contact` values that Contact.jsx displays and removed their `TODO`s. Contact.jsx itself needed no changes, since it already renders the email as a mailto link and LinkedIn/GitHub as new-tab links once they're set.
+- email: klambertinfosystems400@gmail.com
+- LinkedIn: https://www.linkedin.com/in/kevinlambert1993/
+- GitHub: https://github.com/lambekd
+- location: West Lafayette, IN

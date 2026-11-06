@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import SectionButtons from '../components/SectionButtons.jsx';
 import { profile } from '../data/portfolio.js';
 
 const buttons = [
@@ -40,15 +40,7 @@ export default function Home() {
         </div>
       </div>
 
-      <nav className="container pb-4 pb-md-5" aria-label="Site sections">
-        <div className="hero-nav d-flex flex-column flex-sm-row flex-wrap justify-content-center gap-3">
-          {buttons.map((button) => (
-            <Link key={button.to} to={button.to} className={`btn btn-lg ${button.style}`}>
-              {button.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <SectionButtons buttons={buttons} />
     </section>
   );
 }
